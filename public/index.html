@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Saudação</title>
+</head>
+<body>
+  <h1>Digite o horário (HH:MM)</h1>
+  <input type="time" id="horario" name="horario">
+  <button onclick="buscarSaudacao()">Buscar Saudação</button>
+  <p id="resultado"></p>
+
+  <script>
+    async function buscarSaudacao() {
+      const horario = document.getElementById('horario').value;
+      const response = await fetch('/saudacao', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ horario })
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        document.getElementById('resultado').innerText = `Saudação: ${data.saudacao}`;
+      } else {
+        const errorData = await response.json();
+        document.getElementById('resultado').innerText = `Erro: ${errorData.error}`;
+      }
+    }
+  </script>
+</body>
+</html>
