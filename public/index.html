@@ -8,11 +8,11 @@
 <body>
   <h1>Digite o horário (HH:MM)</h1>
   <input type="time" id="horario" name="horario">
-  <button onclick="buscarSaudacao()">Buscar Saudação</button>
+  <button onclick="saudacao()">Saudação</button>
   <p id="resultado"></p>
 
   <script>
-    async function buscarSaudacao() {
+    async function saudacao() {
       const horario = document.getElementById('horario').value;
       const response = await fetch('/saudacao', {
         method: 'POST',
